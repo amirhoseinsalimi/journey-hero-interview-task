@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getNowInMilliseconds } from '../../helpers'
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const useTodoStore = defineStore('todos', () => {
   const todos = ref<Todo[]>([])
@@ -27,6 +29,7 @@ export const useTodoStore = defineStore('todos', () => {
   const addTodo = (todo: Omit<Todo, 'creationDate'>) => {
     todos.value.push({
       ...todo,
+      id: uuidv4(),
       creationDate: getNowInMilliseconds(),
     })
   }
