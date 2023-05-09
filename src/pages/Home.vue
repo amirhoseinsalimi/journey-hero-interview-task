@@ -2,7 +2,7 @@
   <div>
       <VRow>
         <VCol v-for="todo in todos" :key="todo.title" cols="12" lg="4" md="6" xl="3">
-          <JCardTodo v-bind="todo" @delete="deleteList" @edit="editList" />
+          <JCardTodo v-bind="todo" @click="handleClick" @delete="deleteList" @edit="editList" />
         </VCol>
       </VRow>
   </div>
@@ -25,5 +25,7 @@ const deleteList = () => {
   console.log(deleteList.name)
 }
 
-const routeName = computed(() => route.name)
+const handleClick = async (id) => {
+  await router.push({ name: 'Todos', params: { id } })
+}
 </script>

@@ -2,7 +2,7 @@
   <VHover>
     <template #default="{ isHovering, props }">
       <!-- TODO: Add pointer cursor -->
-      <VCard :elevation="isHovering ? 5 : 2" v-bind="props">
+      <VCard :elevation="isHovering ? 5 : 2" v-bind="props" @click="emitClick">
         <VCardTitle class="clearfix">
           {{ title }}
 
@@ -20,7 +20,7 @@
                 v-for="action in actions"
                 :key="action.title"
                 :class="`text-${action.color}`"
-                @click="emitAction(action.action)"
+                @click="handleAction(action.action)"
               >
                 <VListItemTitle>
                   {{ action.title }}
@@ -47,38 +47,40 @@ const actions = [
   {
     title: 'Edit',
     color: 'black',
-    action: 'edit'
+    action: 'edit',
   },
   {
     title: 'Delete',
     color: 'error',
-    action: 'delete'
-  }
+    action: 'delete',
+  },
 ]
 
-defineProps({
+const props = defineProps({
   id: {
     type: Number,
-    required: true
+    required: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   creationDate: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 })
 
-const emit = defineEmits(['edit', 'delete'])
+const emit = defineEmits(['click', 'edit', 'delete'])
 
-const emitEdit = () => emit('edit')
-const emitDelete = () => emit('delete')
+const emitEdit = () => emit('edit', props.id)
+const emitClick = () => emit('click', props.id)
+const emitDelete = () => emit('delete', props.id)
 
-const emitAction = (action) => (action === 'edit' ? emitEdit() : emitDelete())
+const handleAction = (action: string) =>
+  action === 'edit' ? emitEdit() : emitDelete()
 </script>
