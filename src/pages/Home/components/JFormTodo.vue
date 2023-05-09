@@ -3,17 +3,13 @@
     <VContainer>
       <VRow>
         <VCol cols="12" md="4">
-          <VTextField
-            v-model="internalTitle"
-            label="Title"
-            required
-          />
+          <VTextField v-model="internalTitle" :label="__('title')" required />
         </VCol>
 
         <VCol cols="12" md="4">
           <VTextarea
             v-model="internalDescription"
-            label="Description"
+            :label="__('description')"
             required
           />
         </VCol>
@@ -24,6 +20,7 @@
 
 <script setup lang="ts">
 import { computed, defineEmits, defineProps } from 'vue'
+import { __ } from '../../../helpers/index'
 
 const props = defineProps({
   title: {

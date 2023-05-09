@@ -66,6 +66,7 @@ import { useRouter } from 'vue-router'
 import JCardTodo from './components/JCardTodo.vue'
 import { useTodoStore } from '../../store/modules/todos'
 import JFormTodo from './components/JFormTodo.vue'
+import { __ } from '../../helpers'
 
 const todoStore = useTodoStore()
 
@@ -93,11 +94,11 @@ const handleAddButton = () => {
 }
 
 const saveButtonText = computed(() =>
-  todoStore.isEditing.value ? 'Save' : 'Add'
+  todoStore.isEditing.value ? __('save') : __('add')
 )
 
 const dialogHeaderText = computed(() =>
-  todoStore.isEditing.value ? 'Edit To-do' : 'Add a new To-do'
+  todoStore.isEditing.value ? __('editTodo') : __('addANewTodo')
 )
 
 const handleCloseDialog = () => {

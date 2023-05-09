@@ -1,3 +1,13 @@
 {
-  "appTitle": "JourneyHero"
+  "appTitle": "JourneyHero",
+  "add": "Add",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "editTodo": "Edit To-do",
+  "addANewTodo": "Add a new To-do",
+  "title": "Title",
+  "description": "Description",
+  "dueDate": "Due Date",
+  "priority": "Priority"
 }

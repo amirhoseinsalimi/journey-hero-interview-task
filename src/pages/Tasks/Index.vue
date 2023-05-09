@@ -10,30 +10,31 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { VDataTable } from 'vuetify/labs/VDataTable'
+import { __ } from '../../helpers'
 
 const sortBy = ref([{ key: 'calories', order: 'asc' }])
 
 const headers = ref([
   {
-    title: 'Title',
+    title: __('title'),
     key: 'title',
     align: 'start',
     sortable: true,
   },
   {
-    title: 'Description',
+    title: __('description'),
     key: 'description',
     align: 'start',
     sortable: true,
   },
   {
-    title: 'Due Date',
+    title: __('dueDate'),
     key: 'dueDate',
     align: 'start',
     sortable: true,
   },
   {
-    title: 'Priority',
+    title: __('priority'),
     key: 'priority',
     align: 'start',
     sortable: true,

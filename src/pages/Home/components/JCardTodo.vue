@@ -42,15 +42,16 @@
 
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue'
+import { __ } from '../../../helpers'
 
 const actions = [
   {
-    title: 'Edit',
+    title: __('edit'),
     color: 'black',
     action: 'edit',
   },
   {
-    title: 'Delete',
+    title: __('delete'),
     color: 'error',
     action: 'delete',
   },

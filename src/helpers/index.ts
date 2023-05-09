@@ -1,2 +1,2 @@
 export { default as getNowInMilliseconds } from './getNowInMilliseconds'
-export { default as i18n } from './i18n'
+export { default as __ } from './i18n'
