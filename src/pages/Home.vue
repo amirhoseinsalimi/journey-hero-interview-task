@@ -10,8 +10,8 @@
 
     <VContainer>
       <VRow>
-        <VCol cols="12" lg="4" md="6" xl="3" v-for="todo in todos" :key="todo.title">
-          <JCardTodo v-bind="todo" @edit="editList" @delete="deleteList" />
+        <VCol v-for="todo in todos" :key="todo.title" cols="12" lg="4" md="6" xl="3">
+          <JCardTodo v-bind="todo" @delete="deleteList" @edit="editList" />
         </VCol>
       </VRow>
     </VContainer>

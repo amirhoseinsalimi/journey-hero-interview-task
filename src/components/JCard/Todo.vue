@@ -1,31 +1,33 @@
 <template>
   <VHover>
-    <template v-slot:default="{ isHovering, props }">
+    <template #default="{ isHovering, props }">
       <!-- TODO: Add pointer cursor -->
-      <VCard
-        v-bind:="props"
-        :elevation="isHovering ? 5 : 2"
-      >
+      <VCard :elevation="isHovering ? 5 : 2" v-bind="props">
         <VCardTitle class="clearfix">
           {{ title }}
 
-          <v-menu>
-            <template v-slot:activator="{ props }">
-              <VIcon v-bind="props" class="float-right" color="grey" icon="mdi-dots-horizontal" />
+          <VMenu>
+            <template #activator="{ props }">
+              <VIcon
+                v-bind="props"
+                class="float-right"
+                color="grey"
+                icon="mdi-dots-horizontal"
+              />
             </template>
-            <v-list>
-              <v-list-item
+            <VList>
+              <VListItem
                 v-for="action in actions"
                 :key="action.title"
-                @click="emitAction(action.action)"
                 :class="`text-${action.color}`"
+                @click="emitAction(action.action)"
               >
-                <v-list-item-title>
+                <VListItemTitle>
                   {{ action.title }}
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+                </VListItemTitle>
+              </VListItem>
+            </VList>
+          </VMenu>
         </VCardTitle>
         <VCardSubtitle>
           {{ creationDate }}
@@ -39,33 +41,33 @@
 </template>
 
 <script setup lang="ts">
-import {defineEmits, defineProps} from 'vue'
+import { defineEmits, defineProps } from 'vue'
 
 const actions = [
   {
     title: 'Edit',
     color: 'black',
-    action: 'edit',
+    action: 'edit'
   },
   {
     title: 'Delete',
     color: 'error',
-    action: 'delete',
+    action: 'delete'
   }
 ]
 
-const props = defineProps({
+defineProps({
   id: {
     type: Number,
-    required: true,
+    required: true
   },
   title: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   creationDate: {
     type: Number,
@@ -75,9 +77,8 @@ const props = defineProps({
 
 const emit = defineEmits(['edit', 'delete'])
 
-const emitAction = (action) =>
-    action === 'edit' ? emitEdit() : emitDelete()
-
 const emitEdit = () => emit('edit')
 const emitDelete = () => emit('delete')
+
+const emitAction = (action) => (action === 'edit' ? emitEdit() : emitDelete())
 </script>
