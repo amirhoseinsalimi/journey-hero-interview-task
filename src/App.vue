@@ -1,10 +1,11 @@
 <template>
   <VApp>
     <VMain>
-      <RouterView />
+      <MainLayout />
     </VMain>
   </VApp>
 </template>
 
 <script setup lang="ts">
+import MainLayout from './layouts/MainLayout.vue'
 </script>
