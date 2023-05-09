@@ -3,8 +3,11 @@ import Todo from '../pages/Todos.vue'
 import {createWebHistory, createRouter} from "vue-router";
 
 const routes = [
-  {path: '/home', component: Home},
-  {path: '/todos', component: Todo},
+  {
+    path: '/home', component: Home, name: 'Home'
+  },
+  {
+    path: '/todos', component: Todo, name: 'Todos'},
 ]
 
 const router = createRouter({
