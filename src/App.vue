@@ -1,8 +1,9 @@
 <template>
-  <v-app>
-    <v-main>
-    </v-main>
-  </v-app>
+  <VApp>
+    <VMain>
+      <RouterView />
+    </VMain>
+  </VApp>
 </template>
 
 <script setup lang="ts">
