@@ -2,9 +2,15 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getNowInMilliseconds } from '../../helpers'
 import { v4 as uuidv4 } from 'uuid'
+import useStorageLocal from '../../composables/useStorageLocal'
 
 export const useTodoStore = defineStore('todos', () => {
-  const todos = ref<Todo[]>([])
+  const todos = useStorageLocal<Todo[]>('todos', {
+    initialValue: [],
+    override: false,
+    deep: true,
+    serialize: true,
+  })
   const isAdding = ref(false)
   const isEditing = ref(false)
   const currentTodo = ref<Todo | null>(null)
@@ -34,6 +40,16 @@ export const useTodoStore = defineStore('todos', () => {
     })
   }
 
+  const getTasksOfTodo = (todoId: string) => {
+    const todo = todos.value.find((todo) => todo.id === todoId)
+
+    if (!todo) {
+      throw new Error('Todo not found')
+    }
+
+    return todo.tasks
+  }
+
   return {
     todos,
     isAdding,
@@ -42,6 +58,7 @@ export const useTodoStore = defineStore('todos', () => {
     addTodo,
     setIsAdding,
     setIsEditing,
+    getTasksOfTodo,
     setCurrentTodo,
     clearCurrentTodo,
   }
