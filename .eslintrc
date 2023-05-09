@@ -102,6 +102,7 @@
       }
     ],
     "vue/multi-word-component-names": 1,
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", "always-multiline"]
   }
 }
