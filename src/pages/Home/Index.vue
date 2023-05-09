@@ -2,7 +2,7 @@
   <div>
     <VRow>
       <VCol
-        v-for="todo in todoStore.todos"
+        v-for="(todo, id) in todoStore.todos"
         :key="todo.title"
         cols="12"
         lg="4"
@@ -10,7 +10,7 @@
         xl="3"
       >
         <JCardTodo
-          v-bind="todo"
+          v-bind="{ ...todo, id }"
           @click="handleClick"
           @delete="deleteList"
           @edit="editList"
@@ -30,7 +30,6 @@
     <VDialog
       fullscreen
       :modelValue="todoStore.isAdding || todoStore.isEditing"
-      :scrim="false"
       transition="dialog-bottom-transition"
     >
       <VCard>
@@ -110,7 +109,6 @@ const handleCloseDialog = () => {
 const handleSave = () => {
   handleCloseDialog()
 
-  console.log(todo.value)
   todoStore.addTodo(todo.value)
 }
 </script>

@@ -5,8 +5,8 @@ import { v4 as uuidv4 } from 'uuid'
 import useStorageLocal from '../../composables/useStorageLocal'
 
 export const useTodoStore = defineStore('todos', () => {
-  const todos = useStorageLocal<Todo[]>('todos', {
-    initialValue: [],
+  const todos = useStorageLocal('todos', {
+    initialValue: {},
     override: false,
     deep: true,
     serialize: true,
@@ -32,16 +32,15 @@ export const useTodoStore = defineStore('todos', () => {
   }
 
   const addTodo = (todo: Omit<Todo, 'creationDate'>) => {
-    todos.value.push({
+    todos.value[uuidv4()] = {
       ...todo,
-      id: uuidv4(),
       creationDate: getNowInMilliseconds(),
       tasks: [],
-    })
+    }
   }
 
   const getTasksOfTodo = (todoId: string) => {
-    const todo = todos.value.find((todo) => todo.id === todoId)
+    const todo = todos.value[todoId]
 
     if (!todo) {
       throw new Error('Todo not found')
