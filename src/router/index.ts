@@ -1,5 +1,5 @@
-import Home from '../pages/Home.vue'
-import Todo from '../pages/Todos.vue'
+import Home from '../pages/Home/Index.vue'
+import Tasks from '../pages/Tasks/Index.vue'
 import { createWebHistory, createRouter } from 'vue-router'
 
 const routes = [
@@ -9,9 +9,9 @@ const routes = [
     component: Home,
   },
   {
-    path: '/todos/:id',
-    name: 'Todos',
-    component: Todo,
+    path: '/tasks/:id',
+    name: 'Tasks',
+    component: Tasks,
   },
 ]
 

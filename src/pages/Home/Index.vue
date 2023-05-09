@@ -1,7 +1,6 @@
 <template>
   <div>
     <VRow>
-      {{ todoStore.todos }}
       <VCol
         v-for="todo in todoStore.todos"
         :key="todo.title"
@@ -52,7 +51,7 @@
           </VToolbarItems>
         </VToolbar>
 
-        <FormTodo
+        <JFormTodo
           v-model:description="todo.description"
           v-model:title="todo.title"
         />
@@ -64,9 +63,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import JCardTodo from '../components/JCard/Todo.vue'
-import { useTodoStore } from '../store/modules/todos'
-import FormTodo from '../components/FormTodo.vue'
+import JCardTodo from './components/JCardTodo.vue'
+import { useTodoStore } from '../../store/modules/todos'
+import JFormTodo from './components/JFormTodo.vue'
 
 const todoStore = useTodoStore()
 
@@ -86,7 +85,7 @@ const deleteList = () => {
 }
 
 const handleClick = async (id) => {
-  await router.push({ name: 'Todos', params: { id } })
+  await router.push({ name: 'Tasks', params: { id } })
 }
 
 const handleAddButton = () => {
