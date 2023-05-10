@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 import { __ } from '../../../helpers/index'
 import DatePicker from 'vue3-persian-datetime-picker'
 
