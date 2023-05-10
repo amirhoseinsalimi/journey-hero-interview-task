@@ -30,7 +30,7 @@
           </VMenu>
         </VCardTitle>
         <VCardSubtitle>
-          {{ creationDate }}
+          {{ formattedDate }}
         </VCardSubtitle>
         <VCardText>
           {{ description }}
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue'
+import { computed, defineEmits, defineProps } from 'vue'
 import { __ } from '../../../helpers'
 
 const actions = [
@@ -77,6 +77,17 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['click', 'edit', 'delete'])
+
+const formattedDate = computed(() => {
+  return new Intl.DateTimeFormat('en-US', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false,
+  }).format(new Date(props.creationDate).getTime())
+})
 
 const emitEdit = () => emit('edit', props.id)
 const emitClick = () => emit('click', props.id)
