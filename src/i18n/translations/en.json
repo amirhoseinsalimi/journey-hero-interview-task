@@ -5,6 +5,9 @@
   "edit": "Edit",
   "delete": "Delete",
   "cancel": "Cancel",
+  "filter": "Filter",
+  "filters": "Filters",
+  "clearFilters": "Clear Filters",
   "editTodo": "Edit To-do",
   "addANewTodo": "Add a new To-do",
   "title": "Title",
@@ -12,6 +15,8 @@
   "dueDate": "Due Date",
   "priority": "Priority",
   "done": "Done",
+  "fromDueDate": "From Due Date",
+  "toDueDate": "To Due Date",
   "areYouSureYouWantToDeleteTodo": "Are you sure you want to delete \"{{ title }}\" todo?",
   "areYouSureYouWantToDeleteTask": "Are you sure you want to delete \"{{ title }}\" task?"
 }

@@ -1,6 +1,6 @@
 <template>
-  <VRow>
-    <VCol cols="12" md="4" xl="2">
+  <VRow align="center" justify="end">
+    <VCol cols="12" md="6" xl="2">
       <VSelect
         v-model="selectedHeaders"
         :items="headers"
@@ -8,13 +8,22 @@
         multiple
       />
     </VCol>
+
+    <VBtn
+      color="primary"
+      flat
+      variant="outlined"
+      @click="filterIsOpen ? closeFilters() : openFilters()"
+    >
+      {{ __('filters') }}
+    </VBtn>
   </VRow>
 
   <VDataTable
     v-model:sortBy="sortBy"
     class="elevation-1"
     :headers="tableHeaders"
-    :items="tasksStore.tasks"
+    :items="filteredTasks"
   >
     <template #item="{ item }">
       <tr>
@@ -41,12 +50,7 @@
         <td>
           <VMenu>
             <template #activator="{ props }">
-              <VIcon
-                v-bind="props"
-                class="float-right"
-                color="grey"
-                icon="mdi-dots-vertical"
-              />
+              <VIcon v-bind="props" color="grey" icon="mdi-dots-vertical" />
             </template>
             <VList>
               <VListItem
@@ -126,17 +130,30 @@
       </VCardActions>
     </VCard>
   </VDialog>
+
+  <JFilterDrawer
+    v-model:open="filterIsOpen"
+    @clear="filters = $event"
+    @filter="filters = $event"
+  />
 </template>
 
 <script setup lang="ts">
-import {computed, onBeforeMount, onMounted, ref} from 'vue'
+import { computed, onBeforeMount, onMounted, ref } from 'vue'
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import { __, camelize } from '../../helpers'
 import { useTasksStore } from '../../store/modules/tasks'
 import { useRoute } from 'vue-router'
 import JFormTask from './components/JFormTask.vue'
+import JFilterDrawer from './components/JFilterDrawer.vue'
 
 const sortBy = ref([{ key: 'calories', order: 'asc' }])
+
+const filterIsOpen = ref(false)
+const filters = ref({})
+
+const openFilters = () => (filterIsOpen.value = true)
+const closeFilters = () => (filterIsOpen.value = false)
 
 const actions = [
   {
@@ -182,6 +199,19 @@ const tableHeaders = computed(() =>
 
 const tasksStore = useTasksStore()
 
+const filteredTasks = computed(() => {
+  if (!filters.value.hasFilters) {
+    return tasksStore.tasks
+  }
+
+  return tasksStore.tasks.filter(
+    (t) =>
+      t.priority === filters.value.priority &&
+      filters.value.dueDateStart <= t.dueDate &&
+      t.dueDate <= filters.value.dueDateEnd
+  )
+})
+
 const saveButtonText = computed(() =>
   tasksStore.isEditing ? __('save') : __('add')
 )
@@ -200,10 +230,7 @@ const handleSave = () => {
   if (tasksStore.isAdding) {
     tasksStore.addTaskToTodo(currentTodoId.value, tasksStore.currentTask)
   } else {
-    tasksStore.updateTask(
-      tasksStore.currentTask.id,
-      tasksStore.currentTask
-    )
+    tasksStore.updateTask(tasksStore.currentTask.id, tasksStore.currentTask)
   }
 
   handleCloseDialog()

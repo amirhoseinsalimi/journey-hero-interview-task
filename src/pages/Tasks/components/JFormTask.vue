@@ -16,8 +16,8 @@
           <DatePicker
             v-model="internalDueDate"
             customInput=".task-due-date"
-            displayFormat="DD/MM/YYYY HH:mm"
-            format="DD/MM/YYYY HH:mm"
+            displayFormat="MM/DD/YYYY HH:mm"
+            format="MM/DD/YYYY HH:mm"
             locale="en"
             type="datetime"
           />
@@ -43,8 +43,7 @@
 import { computed, defineProps } from 'vue'
 import { __ } from '../../../helpers/index'
 import DatePicker from 'vue3-persian-datetime-picker'
-
-const priorities = ['High', 'Medium', 'Low']
+import { priorities } from '../../../shared'
 
 const props = defineProps({
   title: {
