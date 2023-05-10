@@ -1,9 +1,13 @@
 <template>
   <VHover>
     <template #default="{ isHovering, props }">
-      <!-- TODO: Add pointer cursor -->
-      <VCard :elevation="isHovering ? 5 : 2" v-bind="props" @click="emitClick">
-        <VCardTitle class="clearfix">
+      <VCard
+        :elevation="isHovering ? 5 : 2"
+        max-height="300px"
+        v-bind="props"
+        @click="emitClick"
+      >
+        <VCardTitle class="text-truncate clearfix">
           {{ title }}
 
           <VMenu>
