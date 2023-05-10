@@ -204,12 +204,30 @@ const filteredTasks = computed(() => {
     return tasksStore.tasks
   }
 
-  return tasksStore.tasks.filter(
-    (t) =>
-      t.priority === filters.value.priority &&
-      filters.value.dueDateStart <= t.dueDate &&
-      t.dueDate <= filters.value.dueDateEnd
-  )
+  const priority = filters.value.priority
+  const dueDateEnd = filters.value.dueDateEnd
+  const dueDateStart = filters.value.dueDateStart
+
+  if (priority && dueDateStart && dueDateEnd) {
+    return tasksStore.tasks.filter(
+      (t) =>
+        t.priority === filters.value.priority &&
+        filters.value.dueDateStart <= t.dueDate &&
+        t.dueDate <= filters.value.dueDateEnd
+    )
+  }
+
+  if (priority && dueDateStart) {
+    return tasksStore.tasks.filter(
+      (t) =>
+        t.priority === filters.value.priority &&
+        filters.value.dueDateStart <= t.dueDate
+    )
+  }
+
+  if (priority) {
+    return tasksStore.tasks.filter((t) => t.priority === filters.value.priority)
+  }
 })
 
 const saveButtonText = computed(() =>

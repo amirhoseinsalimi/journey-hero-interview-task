@@ -20,8 +20,6 @@
         type="date"
       />
 
-      {{ dueDateRange }}
-
       <VBtn
         block
         class="mb-3"
