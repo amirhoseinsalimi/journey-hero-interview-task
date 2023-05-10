@@ -1,5 +1,5 @@
-import type { I18nKeys } from '../i18n'
-import en from '../i18n/translations/en.json'
+import type { I18nKeys } from '@/i18n'
+import en from '@/i18n/translations/en.json'
 
 const templateMatcher = /{{\s?([^{}\s]*)\s?}}/g
 

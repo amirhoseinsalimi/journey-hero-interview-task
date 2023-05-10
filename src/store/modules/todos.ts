@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import {ref, watch} from 'vue'
-import { getNowInMilliseconds } from '../../helpers'
+import { getNowInMilliseconds } from '@/helpers'
 import { v4 as uuidv4 } from 'uuid'
-import useStorageLocal from '../../composables/useStorageLocal'
+import useStorageLocal from '@/composables/useStorageLocal'
 
 const EMPTY_TODO: Todo = {
   id: '0',

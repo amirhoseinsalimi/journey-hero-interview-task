@@ -4,7 +4,7 @@ import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import routes from './router'
 import store from './store'
-import '../src/assets/scss/main.scss'
+import '@/assets/scss/main.scss'
 
 (async () => await loadFonts())()
 
