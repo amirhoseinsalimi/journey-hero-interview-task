@@ -62,11 +62,7 @@ export const useTasksStore = defineStore('tasks', () => {
       throw new Error(`Task with ID: ${taskId} not found`)
     }
 
-    console.log(taskId, task)
-    // return
-
     tasks.value[index] = { ...task, id: taskId }
-    // todoStore.todos[todoId].tasks.splice(index, 0, { ...task, id: taskId })
   }
 
   const deleteTask = (taskId: string) => {

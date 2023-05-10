@@ -97,7 +97,6 @@ const openTodoList = async (todoId: string) =>
   await router.push({ name: 'Tasks', params: { todoId } })
 
 const openDeleteDialog = (todoId: string) => {
-  console.log(111)
   todoStore.setCurrentTodo(todoId)
   todoStore.setIsDeleting(true)
 }
