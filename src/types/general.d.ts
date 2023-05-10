@@ -1,9 +1,10 @@
 type Priority = 'High' | 'Medium' | 'Low'
 
 type Task = {
+  id: string
   title: string
   description: string
-  dueDate: number
+  dueDate: number | null
   done: boolean
   priority: Priority
 }

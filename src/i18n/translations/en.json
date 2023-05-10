@@ -11,5 +11,7 @@
   "description": "Description",
   "dueDate": "Due Date",
   "priority": "Priority",
-  "areYouSureYouWantToDeleteTodo": "Are you sure you want to delete \"{{ title }}\" todo?"
+  "done": "Done",
+  "areYouSureYouWantToDeleteTodo": "Are you sure you want to delete \"{{ title }}\" todo?",
+  "areYouSureYouWantToDeleteTask": "Are you sure you want to delete \"{{ title }}\" task?"
 }
