@@ -63,14 +63,11 @@
           {{ __('areYouSureYouWantToDeleteTodo', todoStore.currentTodo) }}
         </VCardText>
         <VCardActions>
-          <VBtn
-            color="error"
-            @click="todoStore.deleteTodo(todoStore.currentTodo.id)"
-          >
+          <VBtn color="error" @click="handleDelete">
             {{ __('delete') }}
           </VBtn>
 
-          <VBtn color="primary" @click="todoStore.setIsDeleting(false)">
+          <VBtn color="primary" @click="handleCloseDialog">
             {{ __('cancel') }}
           </VBtn>
         </VCardActions>
@@ -105,25 +102,27 @@ const openDeleteDialog = (todoId: string) => {
 }
 
 const handleAddButton = () => {
+  todoStore.clearCurrentTodo()
   todoStore.setIsAdding(true)
 }
 
 const saveButtonText = computed(() =>
-  todoStore.isEditing ? __('save') : __('add'),
+  todoStore.isEditing ? __('save') : __('add')
 )
 
 const dialogHeaderText = computed(() =>
-  todoStore.isEditing ? __('editTodo') : __('addANewTodo'),
+  todoStore.isEditing ? __('editTodo') : __('addANewTodo')
 )
 
 const formIsValid = computed(
-  () => todoStore.currentTodo.description && todoStore.currentTodo.title,
+  () => todoStore.currentTodo.description && todoStore.currentTodo.title
 )
 
 const handleCloseDialog = () => {
   todoStore.clearCurrentTodo()
   todoStore.setIsAdding(false)
   todoStore.setIsEditing(false)
+  todoStore.setIsDeleting(false)
 }
 
 const handleSave = () => {
@@ -132,6 +131,12 @@ const handleSave = () => {
   } else {
     todoStore.updateTodo(todoStore.currentTodo.id, todoStore.currentTodo)
   }
+
+  handleCloseDialog()
+}
+
+const handleDelete = () => {
+  todoStore.deleteTodo(todoStore.currentTodo.id)
 
   handleCloseDialog()
 }

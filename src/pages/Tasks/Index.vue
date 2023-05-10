@@ -119,12 +119,12 @@
       <VCardActions>
         <VBtn
           color="error"
-          @click="tasksStore.deleteTask(tasksStore.currentTask.id)"
+          @click="handleDelete"
         >
           {{ __('delete') }}
         </VBtn>
 
-        <VBtn color="primary" @click="tasksStore.setIsDeleting(false)">
+        <VBtn color="primary" @click="handleCloseDialog">
           {{ __('cancel') }}
         </VBtn>
       </VCardActions>
@@ -249,6 +249,7 @@ const handleCloseDialog = () => {
   tasksStore.clearCurrentTask()
   tasksStore.setIsAdding(false)
   tasksStore.setIsEditing(false)
+  tasksStore.setIsDeleting(false)
 }
 
 const handleSave = () => {
@@ -266,6 +267,7 @@ onBeforeMount(() => {
 })
 
 const handleAddButton = () => {
+  tasksStore.clearCurrentTask()
   tasksStore.setIsAdding(true)
 }
 
@@ -286,4 +288,10 @@ onMounted(tasksStore.clearCurrentTask)
 
 const handleAction = (action: string, taskItem: string) =>
   action === 'edit' ? openEditDialog(taskItem) : openDeleteDialog(taskItem)
+
+const handleDelete = () => {
+  tasksStore.deleteTask(tasksStore.currentTask.id)
+
+  handleCloseDialog()
+}
 </script>
