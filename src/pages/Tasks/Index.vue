@@ -10,6 +10,7 @@
     </VCol>
 
     <VBtn
+      class="mb-4"
       color="primary"
       flat
       variant="outlined"
@@ -117,10 +118,7 @@
         {{ __('areYouSureYouWantToDeleteTask', tasksStore.currentTask) }}
       </VCardText>
       <VCardActions>
-        <VBtn
-          color="error"
-          @click="handleDelete"
-        >
+        <VBtn color="error" @click="handleDelete">
           {{ __('delete') }}
         </VBtn>
 
