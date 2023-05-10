@@ -2,11 +2,11 @@
   <VForm>
     <VContainer>
       <VRow>
-        <VCol cols="12" md="4">
+        <VCol cols="12">
           <VTextField v-model="internalTitle" :label="__('title')" required />
         </VCol>
 
-        <VCol cols="12" md="4">
+        <VCol cols="12">
           <VTextarea
             v-model="internalDescription"
             :label="__('description')"
