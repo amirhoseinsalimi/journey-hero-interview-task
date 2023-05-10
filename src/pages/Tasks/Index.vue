@@ -27,7 +27,7 @@
   >
     <template #item="{ item }">
       <tr>
-        <td>
+        <td v-show="selectedHeaders.includes('Done')">
           <VCheckbox
             v-model="item.columns.done"
             class="pt-5"
@@ -47,7 +47,7 @@
         <td>
           {{ item.columns.priority }}
         </td>
-        <td>
+        <td v-show="selectedHeaders.includes('Edit')">
           <VMenu>
             <template #activator="{ props }">
               <VIcon v-bind="props" color="grey" icon="mdi-dots-vertical" />
