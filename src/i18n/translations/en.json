@@ -18,5 +18,7 @@
   "fromDueDate": "From Due Date",
   "toDueDate": "To Due Date",
   "areYouSureYouWantToDeleteTodo": "Are you sure you want to delete \"{{ title }}\" todo?",
-  "areYouSureYouWantToDeleteTask": "Are you sure you want to delete \"{{ title }}\" task?"
+  "areYouSureYouWantToDeleteTask": "Are you sure you want to delete \"{{ title }}\" task?",
+  "wowYouHaveTasksTodoTackleThemASPA": "Wow! You have tasks to do. Tackle them ASAP!",
+  "gotIt": "Got it!"
 }
