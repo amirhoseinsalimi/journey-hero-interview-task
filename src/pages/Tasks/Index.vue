@@ -96,7 +96,7 @@
         <VSpacer />
 
         <VToolbarItems>
-          <VBtn variant="text" @click="handleSave">
+          <VBtn :disabled="!formIsValid" variant="text" @click="handleSave">
             {{ saveButtonText }}
           </VBtn>
         </VToolbarItems>
@@ -176,7 +176,15 @@ const task = ref({
 })
 
 const route = useRoute()
+const tasksStore = useTasksStore()
+
 const currentTodoId = computed(() => route.params.todoId.toString())
+const formIsValid = computed(
+  () =>
+    tasksStore.currentTask.description &&
+    tasksStore.currentTask.dueDate &&
+    tasksStore.currentTask.title
+)
 
 const headers = ref([
   __('done'),
@@ -196,8 +204,6 @@ const tableHeaders = computed(() =>
     sortable: true,
   }))
 )
-
-const tasksStore = useTasksStore()
 
 const filteredTasks = computed(() => {
   if (!filters.value.hasFilters) {

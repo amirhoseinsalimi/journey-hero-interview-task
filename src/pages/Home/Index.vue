@@ -44,7 +44,7 @@
           <VSpacer />
 
           <VToolbarItems>
-            <VBtn variant="text" @click="handleSave">
+            <VBtn :disabled="!formIsValid" variant="text" @click="handleSave">
               {{ saveButtonText }}
             </VBtn>
           </VToolbarItems>
@@ -63,7 +63,10 @@
           {{ __('areYouSureYouWantToDeleteTodo', todoStore.currentTodo) }}
         </VCardText>
         <VCardActions>
-          <VBtn color="error" @click="todoStore.deleteTodo(todoStore.currentTodo.id)">
+          <VBtn
+            color="error"
+            @click="todoStore.deleteTodo(todoStore.currentTodo.id)"
+          >
             {{ __('delete') }}
           </VBtn>
 
@@ -106,11 +109,15 @@ const handleAddButton = () => {
 }
 
 const saveButtonText = computed(() =>
-  todoStore.isEditing ? __('save') : __('add')
+  todoStore.isEditing ? __('save') : __('add'),
 )
 
 const dialogHeaderText = computed(() =>
-  todoStore.isEditing ? __('editTodo') : __('addANewTodo')
+  todoStore.isEditing ? __('editTodo') : __('addANewTodo'),
+)
+
+const formIsValid = computed(
+  () => todoStore.currentTodo.description && todoStore.currentTodo.title,
 )
 
 const handleCloseDialog = () => {
