@@ -79,10 +79,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { __ } from '@/helpers'
+import { useTodoStore } from '@/store/modules/todos'
 import JCardTodo from './components/JCardTodo.vue'
-import { useTodoStore } from '../../store/modules/todos'
 import JFormTodo from './components/JFormTodo.vue'
-import { __ } from '../../helpers'
 
 const todoStore = useTodoStore()
 

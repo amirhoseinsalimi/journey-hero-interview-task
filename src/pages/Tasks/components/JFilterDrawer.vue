@@ -42,10 +42,10 @@
 </template>
 
 <script setup lang="ts">
-import { priorities } from '../../../shared'
 import DatePicker from 'vue3-persian-datetime-picker'
 import { computed, ref } from 'vue'
-import { __ } from '../../../helpers'
+import { __ } from '@/helpers'
+import { priorities } from '@/shared'
 
 const props = defineProps({
   open: {

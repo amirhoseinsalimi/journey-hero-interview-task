@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
-import { __ } from '../../../helpers/index'
+import { __ } from '@/helpers/index'
 
 const props = defineProps({
   title: {

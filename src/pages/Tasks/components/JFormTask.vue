@@ -41,9 +41,9 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
-import { __ } from '../../../helpers/index'
 import DatePicker from 'vue3-persian-datetime-picker'
-import { priorities } from '../../../shared'
+import { __ } from '@/helpers/index'
+import { priorities } from '@/shared'
 
 const props = defineProps({
   title: {

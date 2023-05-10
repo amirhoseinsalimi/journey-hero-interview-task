@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
-import { __ } from '../../../helpers'
+import { __ } from '@/helpers'
 
 const actions = [
   {

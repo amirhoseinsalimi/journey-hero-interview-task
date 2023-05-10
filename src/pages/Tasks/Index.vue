@@ -140,10 +140,10 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount, onMounted, ref } from 'vue'
-import { VDataTable } from 'vuetify/labs/VDataTable'
-import { __, camelize } from '../../helpers'
-import { useTasksStore } from '../../store/modules/tasks'
 import { useRoute } from 'vue-router'
+import { __, camelize } from '@/helpers'
+import { useTasksStore } from '@/store/modules/tasks'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 import JFormTask from './components/JFormTask.vue'
 import JFilterDrawer from './components/JFilterDrawer.vue'
 
