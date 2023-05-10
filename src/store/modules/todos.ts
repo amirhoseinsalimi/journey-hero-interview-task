@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import {ref, watch} from 'vue'
 import { getNowInMilliseconds } from '../../helpers'
 import { v4 as uuidv4 } from 'uuid'
 import useStorageLocal from '../../composables/useStorageLocal'
@@ -77,6 +77,22 @@ export const useTodoStore = defineStore('todos', () => {
 
     return todo.tasks
   }
+
+  watch(isAdding, (value) => {
+    if (value) {
+      return
+    }
+
+    clearCurrentTodo()
+  })
+
+  watch(isEditing, (value) => {
+    if (value) {
+      return
+    }
+
+    clearCurrentTodo()
+  })
 
   return {
     todos,

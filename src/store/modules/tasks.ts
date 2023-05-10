@@ -85,7 +85,6 @@ export const useTasksStore = defineStore('tasks', () => {
       return
     }
 
-    console.log('cloooooooooooooooooooose')
     clearCurrentTask()
   })
 
@@ -94,7 +93,6 @@ export const useTasksStore = defineStore('tasks', () => {
       return
     }
 
-    console.log('cloooooooooooooooooooose')
     clearCurrentTask()
   })
 
