@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
-import {ref, watch} from 'vue'
+import { ref, watch } from 'vue'
 import { getNowInMilliseconds } from '@/helpers'
 import { v4 as uuidv4 } from 'uuid'
 import useStorageLocal from '@/composables/useStorageLocal'
+import useToggle from '@/composables/useToggle'
 
 const EMPTY_TODO: Todo = {
   id: '0',
@@ -19,22 +20,11 @@ export const useTodoStore = defineStore('todos', () => {
     deep: true,
     serialize: true,
   })
-  const isAdding = ref(false)
-  const isEditing = ref(false)
-  const isDeleting = ref(false)
   const currentTodo = ref<Todo>(EMPTY_TODO)
 
-  const setIsAdding = (adding: boolean) => {
-    isAdding.value = adding
-  }
-
-  const setIsEditing = (editing: boolean) => {
-    isEditing.value = editing
-  }
-
-  const setIsDeleting = (deleting: boolean) => {
-    isDeleting.value = deleting
-  }
+  const [isAdding, setIsAdding] = useToggle(false)
+  const [isEditing, setIsEditing] = useToggle(false)
+  const [isDeleting, setIsDeleting] = useToggle(false)
 
   const setCurrentTodo = (todoId: string) => {
     currentTodo.value = todos.value[todoId]

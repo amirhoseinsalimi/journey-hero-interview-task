@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { useTodoStore } from './todos'
+import useToggle from "@/composables/useToggle";
 
 const EMPTY_TASK: Task = {
   id: '',
@@ -17,26 +18,15 @@ export const useTasksStore = defineStore('tasks', () => {
 
   const tasks = ref<Task[]>([])
   const currentTask = ref<Task>(EMPTY_TASK)
-  const isAdding = ref(false)
-  const isEditing = ref(false)
-  const isDeleting = ref(false)
+
+  const [isAdding, setIsAdding] = useToggle(false)
+  const [isEditing, setIsEditing] = useToggle(false)
+  const [isDeleting, setIsDeleting] = useToggle(false)
 
   const getTasksOfTodo = (todoId: string) => {
     tasks.value = todoStore.getTasksOfTodo(todoId)
 
     return tasks.value
-  }
-
-  const setIsEditing = (editing: boolean) => {
-    isEditing.value = editing
-  }
-
-  const setIsAdding = (adding: boolean) => {
-    isAdding.value = adding
-  }
-
-  const setIsDeleting = (deleting: boolean) => {
-    isDeleting.value = deleting
   }
 
   const setCurrentTask = (task: Task) => {

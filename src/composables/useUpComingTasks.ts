@@ -1,10 +1,11 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useTodoStore } from '@/store/modules/todos'
 import { isToday } from '@/helpers'
+import useToggle from '@/composables/useToggle'
 
 export default function useUpComingTasks() {
   const upComingTasks = ref<Task[]>([])
-  const dialogIsOpen = ref(false)
+  const [dialogIsOpen, setDialogIsOpen] = useToggle(false)
 
   const isThereAnyUpComingTask = computed(() => upComingTasks.value.length)
 
@@ -26,7 +27,7 @@ export default function useUpComingTasks() {
     })
   }
 
-  watch(isThereAnyUpComingTask, (value) => (dialogIsOpen.value = !!value))
+  watch(isThereAnyUpComingTask, (value) => setDialogIsOpen(!!value))
 
   onMounted(calculateUpComingTasks)
 

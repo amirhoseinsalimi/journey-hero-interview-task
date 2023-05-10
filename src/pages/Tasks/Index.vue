@@ -146,14 +146,15 @@ import { useTasksStore } from '@/store/modules/tasks'
 import { VDataTable } from 'vuetify/labs/VDataTable'
 import JFormTask from './components/JFormTask.vue'
 import JFilterDrawer from './components/JFilterDrawer.vue'
+import useToggle from '@/composables/useToggle'
 
 const sortBy = ref([{ key: 'calories', order: 'asc' }])
 
-const filterIsOpen = ref(false)
+const [filterIsOpen, setFilterIsOpen] = useToggle(false)
 const filters = ref({})
 
-const openFilters = () => (filterIsOpen.value = true)
-const closeFilters = () => (filterIsOpen.value = false)
+const openFilters = () => setFilterIsOpen(true)
+const closeFilters = () => setFilterIsOpen(false)
 
 const actions = [
   {
