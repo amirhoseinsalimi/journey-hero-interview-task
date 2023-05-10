@@ -66,7 +66,7 @@ const task = ref({
 })
 
 const route = useRoute()
-const currentTodoId = computed(() => route.params.id.toString())
+const currentTodoId = computed(() => route.params.todoId.toString())
 
 const headers = ref([
   {
@@ -118,9 +118,7 @@ const handleSave = () => {
 }
 
 onBeforeMount(() => {
-  console.log(111, tasksStore.tasks)
   tasksStore.getTasksOfTodo(currentTodoId.value)
-  console.log(222, tasksStore.tasks)
 })
 
 const handleAddButton = () => {

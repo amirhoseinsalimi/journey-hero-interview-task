@@ -4,10 +4,12 @@
   "save": "Save",
   "edit": "Edit",
   "delete": "Delete",
+  "cancel": "Cancel",
   "editTodo": "Edit To-do",
   "addANewTodo": "Add a new To-do",
   "title": "Title",
   "description": "Description",
   "dueDate": "Due Date",
-  "priority": "Priority"
+  "priority": "Priority",
+  "areYouSureYouWantToDeleteTodo": "Are you sure you want to delete \"{{ title }}\" todo?"
 }

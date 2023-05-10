@@ -4,6 +4,7 @@ type Task = {
   title: string
   description: string
   dueDate: number
+  done: boolean
   priority: Priority
 }
 
@@ -12,6 +13,5 @@ type Todo = {
   title: string
   description: string
   creationDate: number
-  done: boolean
   tasks: Task[]
 }

@@ -10,10 +10,10 @@
         xl="3"
       >
         <JCardTodo
-          v-bind="{ ...todo, id }"
-          @click="handleClick"
-          @delete="deleteList"
-          @edit="editList"
+          v-bind="{ ...todo, id: id || todo }"
+          @click="openTodoList"
+          @delete="openDeleteDialog"
+          @edit="openEditDialog"
         />
       </VCol>
     </VRow>
@@ -51,16 +51,33 @@
         </VToolbar>
 
         <JFormTodo
-          v-model:description="todo.description"
-          v-model:title="todo.title"
+          v-model:description="todoStore.currentTodo.description"
+          v-model:title="todoStore.currentTodo.title"
         />
+      </VCard>
+    </VDialog>
+
+    <VDialog v-model="todoStore.isDeleting" width="auto">
+      <VCard>
+        <VCardText>
+          {{ __('areYouSureYouWantToDeleteTodo', todoStore.currentTodo) }}
+        </VCardText>
+        <VCardActions>
+          <VBtn color="error" @click="todoStore.deleteTodo(todoStore.currentTodo.id)">
+            {{ __('delete') }}
+          </VBtn>
+
+          <VBtn color="primary" @click="todoStore.setIsDeleting(false)">
+            {{ __('cancel') }}
+          </VBtn>
+        </VCardActions>
       </VCard>
     </VDialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import JCardTodo from './components/JCardTodo.vue'
 import { useTodoStore } from '../../store/modules/todos'
@@ -69,23 +86,20 @@ import { __ } from '../../helpers'
 
 const todoStore = useTodoStore()
 
-const todo = ref({
-  title: '',
-  description: '',
-})
-
 const router = useRouter()
 
-const editList = () => {
-  console.log(editList.name)
+const openEditDialog = (todoId: string) => {
+  todoStore.setCurrentTodo(todoId)
+  todoStore.setIsEditing(true)
 }
 
-const deleteList = () => {
-  console.log(deleteList.name)
-}
+const openTodoList = async (todoId: string) =>
+  await router.push({ name: 'Tasks', params: { todoId } })
 
-const handleClick = async (id) => {
-  await router.push({ name: 'Tasks', params: { id } })
+const openDeleteDialog = (todoId: string) => {
+  console.log(111)
+  todoStore.setCurrentTodo(todoId)
+  todoStore.setIsDeleting(true)
 }
 
 const handleAddButton = () => {
@@ -93,11 +107,11 @@ const handleAddButton = () => {
 }
 
 const saveButtonText = computed(() =>
-  todoStore.isEditing.value ? __('save') : __('add')
+  todoStore.isEditing ? __('save') : __('add')
 )
 
 const dialogHeaderText = computed(() =>
-  todoStore.isEditing.value ? __('editTodo') : __('addANewTodo')
+  todoStore.isEditing ? __('editTodo') : __('addANewTodo')
 )
 
 const handleCloseDialog = () => {
@@ -107,8 +121,12 @@ const handleCloseDialog = () => {
 }
 
 const handleSave = () => {
-  handleCloseDialog()
+  if (todoStore.isAdding) {
+    todoStore.addTodo(todoStore.currentTodo)
+  } else {
+    todoStore.updateTodo(todoStore.currentTodo.id, todoStore.currentTodo)
+  }
 
-  todoStore.addTodo(todo.value)
+  handleCloseDialog()
 }
 </script>
